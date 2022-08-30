@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %} 
+        <!-- pages-title-start -->
+		<div class="pages-title section-padding">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="pages-title-text text-center">
+							<h2>edit review</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- pages-title-end -->
+        <!-- product-details-section-start -->
+		<div class="product-details pages section-padding-top">
+			<div class="container">
+				<!-- single-product item end -->
+				<!-- reviews area start -->
+				<div class="row">
+					<div class="col-xs-12">
+						<div style="margin-bottom: 50px;" class="reviews padding60 margin-top">
+							<ul class="reviews-tab clearfix">
+								<li class="active"><a data-toggle="tab" href="#reviews">Review</a></li>
+							</ul>
+							<div class="tab-content">
+								<div class="info-reviews review-text tab-pane fade in active" id="reviews">
+												
+									<div class="your-rating log-title">
+										<h3>leave your review</h3>
+									</div>
+									<div class="custom-input">
+										<form action="" method="post">
+											{% csrf_token %}
+											{{ form.non_field_errors }}
+											<div class="row">
+												<div class="col-xs-12">
+													<div class="custom-mess">
+														{{ form.review }}
+													</div>
+													<div >
+														<select style="margin-bottom: 20px;" class="btn btn-success" name='star_value'>
+															<option selected="selected" id="rating_1" disabled>Click to select rating</option>
+															<option value="1"><b>&#9733;</b></option>
+															<option value="2"><b>&#9733; &#9733;</b></option>
+															<option value="3"><b>&#9733; &#9733; &#9733;</b></option>
+															<option value="4"><b>&#9733; &#9733; &#9733; &#9733;</b></option>
+															<option value="5"><b>&#9733; &#9733; &#9733; &#9733; &#9733;</b></option>
+														</select>
+													</div>
+												</div>
+												<div class="col-xs-12">
+													<div class="submit-text">
+														<button type="submit">submit review</button>
+													</div>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- reviews area end -->
+			</div>
+		</div>
+		<!-- product-details section end -->
+
+
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static custom_tags %}
+{% load i18n %}
+
+{% block content %}
+<!-- pages-title-start -->
+<div class="pages-title section-padding">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="pages-title-text text-center">
+					<h2>Blog</h2>
+					<ul class="text-left">
+						<li><a href="{% url 'index' %}">{% trans 'Home' %} </a></li>
+						<li><a href="{% url 'blogs' %}"><span> // </span>{% trans 'Blog' %}</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- pages-title-end -->
+<!-- blog section start -->
+<section class="latest-blog section-padding">
+	<div class="container">
+
+		<div class="row">
+
+			{% for blog in blogs %}
+
+			<div class="col-sm-4">
+				<div class="l-blog-text">
+					<div class="banner"><a href="{% url 'blog_detail' slug=blog.slug %}"><img src="{{ blog.image.url }}" alt="" /></a>
+					</div>
+					<div class="s-blog-text">
+						<h4><a href="{% url 'blog_detail' slug=blog.slug %}">{{ blog.title }}</a></h4>
+						<span>By : <a href="#">{{ blog.author }}</a> | <a href="#">210 Like</a> | <a href="#">69 Comments</a></span>
+						<p>{{ blog.description }}</p>
+					</div>
+					<div class="date-read clearfix">
+						<a href="#"><i class="mdi mdi-clock"></i> {{ blog.created_at | date:"F d, Y"  }}</a>
+						<a href="{% url 'blog_detail' slug=blog.slug %}">read more</a>
+					</div>
+				</div>
+			</div>
+
+			{% endfor %}
+
+		</div>
+
+
+		<div class="pagnation-ul">
+			<ul class="clearfix">
+				{% if page_obj.has_previous %}
+				<li><a href="?page={{ page_obj.previous_page_number }}">&lt;</a></li>
+				{% endif %}
+				
+				{% for page in page_obj.paginator.page_range %}
+					{% if page is page_obj.number %}
+						<li class="active"><span>{{ page }}</span></li>
+					{% else %}
+						<li><a href="?page={{page}}">{{ page }}</a></li>
+					{% endif %}
+				{% endfor %}
+				{% if page_obj.has_next %}
+					<li><a href="?page={{ page_obj.next_page_number }}">&gt;</a></li>
+				{% endif %}
+				
+			</ul>
+		</div>
+	</div>
+</section>
+
+<!-- blog section end -->
+{% endblock %}

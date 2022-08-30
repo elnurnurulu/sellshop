@@ -1,0 +1,26 @@
+version: '3.1'
+
+services: 
+    db:
+        image: postgres
+        restart: always
+        ports:
+          - "5432:5432"
+        volumes:
+          - ./pgdb/:/var/lib/postgresql/data
+        environment: 
+          POSTGRES_PASSWORD: 12345
+          POSTGRES_USER: user
+          POSTGRES_DB: sellshop
+
+    adminer:
+        image: adminer
+        restart: always
+        ports:
+            - 8080:8080 
+
+    redisdb:
+        image: redis
+        restart: always
+        ports:
+            - 6379:6379

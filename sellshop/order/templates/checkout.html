@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- pages-title-start -->
+<div class="pages-title section-padding">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="pages-title-text text-center">
+					<h2>Checkout</h2>
+					<ul class="text-left">
+						<li><a href="{% url 'index' %}">Home </a></li>
+						<li><span> // </span>Checkout</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- pages-title-end -->
+<!-- Checkout content section start -->
+<section class="pages checkout section-padding">
+	<div class="container">
+		{% if message %}
+		<div class="alert alert-danger text-center" role="alert">
+			{{message}}
+		</div>
+		{% endif %}
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="main-input single-cart-form padding60">
+					<div class="log-title">
+						<h3><strong>shipping address</strong></h3>
+					</div>
+					<div class="custom-input">
+						<form id="checkoutForm" action="" method="post">
+							{% csrf_token %}
+						
+						
+							<div class="row">
+								<div class="col-md-6">
+									<label for="billing:firstname"> First Name <span class="required">*</span> </label>
+									{{shipping.first_name}}
+									{{shipping.errors.first_name}}
+								</div>
+								<div class="col-md-6">
+									<label for="billing:lastname"> Last Name <span class="required">*</span> </label>
+									{{shipping.last_name}}
+									{{shipping.errors.last_name}}
+								</div>
+							</div>
+							<div>
+								<label>Address <span class="required">*</span></label>
+								{{shipping.address}}
+								{{shipping.errors.address}}
+							</div>
+							<div class="custom-select">
+								<label for="billing:country_id">Country <span class="required">*</span></label>
+								{{shipping.country}}
+								{{shipping.errors.country}}
+							</div>
+							<div>
+								<label for="billing:city">City <span class="required">*</span></label>
+								{{shipping.city}}
+								{{shipping.errors.city}}
+							</div>
+							<div>
+								<label for="billing:postcode">Zip/Postal Code <span class="required">*</span></label>
+								{{shipping.zipcode}}
+								{{shipping.zipcode.errors}}
+							</div>
+							<div>
+								<label for="billing:telephone">Telephone <span class="required">*</span></label>
+								{{shipping.phone}}
+								{{shipping.phone.errors}}
+							</div>
+							
+							{{shipping.is_default}}
+							<p class="require"><em class="required">* </em>Required Fields</p>
+							{{shipping.errors}}
+							<div class="submit-text">
+								<button type="submit" >Finish Shopping</button>
+							</div>
+						</form>
+
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-6">
+					<div class="padding60">
+						<div class="log-title">
+							<h3><strong>Our order</strong></h3>
+						</div>
+						<div class="cart-form-text pay-details table-responsive">
+							<table id="product_table">
+
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<div style="padding: 0 60px 60px 60px; background: #fff;">
+						<div class="log-title">
+							<h3><strong>Payment method</strong></h3>
+						</div>
+						<div class="categories">
+							<ul id="accordion" class="panel-group clearfix">
+								<li class="panel">
+									<div data-toggle="collapse" data-parent="#accordion" data-target="#collapse3">
+										<div class="medium-a">
+											Paypal
+										</div>
+									</div>
+									<br>
+									<div class="paypal-dsc panel-collapse collapse" id="collapse3">
+										<div class="normal-a">
+											<div id="paypal-button-container"></div>
+										</div>
+									</div>
+								</li>
+							</ul>
+							<div>
+								<!-- <form action="" method="POST" class="submit-text">
+									{% csrf_token %}
+									<button form="checkoutForm" type="submit" value="submit form"
+										{% if cart_products > 0 %} type="submit" {% else %} disabled {% endif %} style="background-color: black;
+										border: none; float: right;" id="checkout-button">Place Order</button>
+								</form> -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- Checkout content section end -->
+
+<!-- all js here -->
+<script src="https://www.paypal.com/sdk/js?client-id=AZXNrqBEo-211x3O7vFTW_2d9a0JT4L4xjspLyqhEv35PTZhfH2YSD8XHYwHT_McEZ-8WJ85tdCPIDDd&currency=USD"></script>
+<script src="{% static 'js/checkout.js' %}"></script>
+<script>
+
+
+  </script>
+
+{% endblock %}

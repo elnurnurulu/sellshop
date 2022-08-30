@@ -1,0 +1,134 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+        <!-- pages-title-start -->
+		<div class="pages-title section-padding">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="pages-title-text text-center">
+							<h2>Cart</h2>
+							<ul class="text-left">
+								<li><a href="{% url 'index' %}">Home </a></li>
+								<li><span> // </span>Cart</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- pages-title-end -->
+		<!-- cart content section start -->
+		<section class="pages cart-page section-padding">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="table-responsive padding60">
+							<table class="wishlist-table text-center">
+								<thead>
+									<tr>
+										<th>Product</th>
+										<th>Price</th>
+										<th>quantity</th>
+										<th>Total Price</th>
+										<th>Remove</th>
+									</tr>
+								</thead>
+								<tbody id="cart_body">
+									
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div id="quantityAlert" class="alert alert-success" role="alert" style="position: fixed; top: 9%; text-align: center; display: none; right: 4%;">
+				</div>
+				<div class="row margin-top">
+					<div class="col-sm-6">
+						<div class="single-cart-form padding60">
+							<div class="log-title">
+								<h3><strong>coupon discount</strong></h3>
+							</div>
+							<div class="cart-form-text custom-input">
+								<p>Enter your coupon code if you have one!</p>
+								<form action="mail.php" method="post">
+									<input id="coupon_code" type="text" name="subject" placeholder="Enter your code here..." />
+									<div class="submit-text coupon">
+										<button id="coupon_button" type="button">apply coupon </button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="single-cart-form padding60">
+							<div class="log-title">
+								<h3><strong>payment details</strong></h3>
+							</div>
+							<div class="cart-form-text pay-details table-responsive">
+								<table id="total_products">
+									<tbody>
+									</tbody>
+									<tfoot>
+									</tfoot>
+								</table>
+							</div>
+							<div id="cont_ship" style="float: right; margin: 16% 0 0 16%;" class="submit-text coupon">
+								<a href="{% url 'checkout' %}">continue shopping </a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- <div class="row margin-top">
+					<div class="col-xs-12">
+						<div class="padding60">
+							<div class="row">
+								<div class="col-xs-12 col-sm-6 col-md-4">
+									<div class="single-cart-form">
+										<div class="log-title">
+											<h3><strong>calculate shipping</strong></h3>
+										</div>
+										<div class="cart-form-text custom-input">
+											<p>Enter your coupon code if you have one!</p>
+											<form action="mail.php" method="post">
+												<input type="text" name="country" placeholder="Country" />
+												<div class="submit-text">
+													<button type="submit" >get a quote</button>
+												</div>
+											</form>
+										</div>
+									</div>	
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-4">
+									<div class="single-cart-form">
+										<div class="cart-form-text post-state custom-input">
+											<form action="mail.php" method="post">
+												<input type="text" name="state" placeholder="Region / State" />
+											</form>
+										</div>
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-4">
+									<div class="single-cart-form">
+										<div class="cart-form-text post-state custom-input">
+											<form action="mail.php" method="post">
+												<input type="text" name="subject" placeholder="Post Code" />
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> -->
+			</div>
+		</section>
+		<!-- cart content section end -->
+		
+
+{% endblock %}
+{% block cart %}
+<script src="{% static 'js/cart.js' %}"></script>
+
+{% endblock %}

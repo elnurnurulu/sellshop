@@ -1,0 +1,95 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block title %} {{title}}{% endblock %} 
+{% block content %}
+<!-- pages-title-start -->
+<div class="pages-title section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="pages-title-text text-center">
+                    <h2>Search Results</h2>
+                    <ul class="text-left">
+                        <li><a href="{% url 'index' %}">Home </a></li>
+                        <li><span> // </span>Search</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="related-post latest-blog section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="section-title text-center">
+                    <h2>You have searched for <span style="color: red; font-weight: bold;"> "{{word}}"</span>.</h2>
+                    <br>
+                    {% if quantity == 0 %}
+                    <h2><span style="color: red; font-weight: bold;"> Product not found.</span></h2>
+                    {% endif %}
+                    
+                </div>
+            </div>
+        </div>
+        {% for productversion in productversions %}
+        <div class="single-list-view">
+            <div class="row">
+                <div class="col-xs-12 col-md-4">
+                    <div class="list-img">
+                        <div class="product-img">
+                            <div class="pro-type sell">
+                                <span>sell</span>
+                            </div>
+                            <a href="{% url 'single_product' productversion.id %}">
+                                {% for image in productversion.product_images.all %} 
+                                {% if image.is_main %}
+                                <img style="width: 270px; height: 340.25px;" src="{{image.image.url}}" alt="Product Title" />
+                                {% endif %}
+                                {% endfor %}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-8">
+                    <div class="list-text">
+                        <h3>{{ productversion.title }}</h3>
+                        <!-- <span>{{ productversion.product.subtitle }}</span> -->
+                        <input type="hidden" value="{{ productversion.id }}" class="Idpro">
+
+                        <div class="ratting floatright">
+                            <!-- <p>( {{ productversion.product.rating }} Rating )</p> -->
+                            <i class="mdi mdi-star"></i>
+                            <i class="mdi mdi-star"></i>
+                            <i class="mdi mdi-star"></i>
+                            <i class="mdi mdi-star-half"></i>
+                            <i class="mdi mdi-star-outline"></i>
+                        </div>
+                        <h5 class="priceItem" data-value="{{productversion.new_price}}">
+                            <del>${{ productversion.old_price }}</del> ${{ productversion.new_price }}
+                        </h5>
+                        <p>{{ productversion.product.description }}</p>
+                        <div class="list-btn">
+                            <a data="{{productversion.id}}" class="cartButton"
+                            id="cartButton" class="add_to_cart">add to
+                                cart</a>
+                            <a data="{{productversion.id}}" class="add_to_wishlist">wishlist</a>
+                            <a href="#" data-toggle="modal"
+                                data-target="#quick-view">zoom</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+<!-- pages-title-end -->
+
+<!-- quick view end -->
+<!-- all js here -->
+<!-- <script src="{% static 'js/add-to-cart.js' %}"></script> -->
+
+
+{% endblock %}

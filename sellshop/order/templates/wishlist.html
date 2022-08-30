@@ -1,0 +1,54 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- pages-title-start -->
+		<div class="pages-title section-padding">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="pages-title-text text-center">
+							<h2>Wishlist</h2>
+							<ul class="text-left">
+								<li><a href="{% url 'index' %}">Home </a></li>
+								<li><span> // </span>Wishlist</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- pages-title-end -->
+		<!-- wishlist content section start -->
+		<section class="pages wishlist-page section-padding">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="table-responsive padding60">
+							<table class="wishlist-table text-center">
+								<thead>
+									<tr>
+										<th>Product</th>
+										<th>Price</th>
+										<th>Stock Status </th>
+										<th>Add To Cart</th>
+										<th>Remove</th>
+									</tr>
+								</thead>
+								<tbody id="wishlist_tbody">
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- wishlist content section end -->
+		<!-- all js here -->
+		{% endblock %}
+

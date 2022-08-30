@@ -1,0 +1,416 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %} 
+
+        <!-- pages-title-start -->
+		<div class="pages-title section-padding">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="pages-title-text text-center">
+							<h2>men’s white t-shirt</h2>
+							<ul class="text-left">
+								<li><a href="{% url 'index' %}">Home </a></li>
+								<li><span> // </span><a href="{% url 'product' %}">shop </a></li>
+								<li><span> // </span>men’s white t-shirt</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- pages-title-end -->
+        <!-- product-details-section-start -->
+		<div class="product-details pages section-padding-top">
+			<div class="container">
+				<div class="row">
+					<div class="single-list-view">
+						<div class="col-xs-12 col-sm-5 col-md-4">
+							<div class="quick-image">
+								<div class="single-quick-image text-center">
+									<div class="list-img">
+										<div class="product-img tab-content">
+											{% for image in images %}
+											{% if image.is_main %}
+											<div class="simpleLens-container tab-pane active fade in" id="sin-{{image.id}}">
+											{% else %}
+											<div class="simpleLens-container tab-pane fade in" id="sin-{{image.id}}">
+											{% endif %}
+												<a class="simpleLens-image" data-lens-image="{{ image }}"
+													href="#"><img style="width: 360px; height: 467px;"
+														src="{{ image }}" alt="" class="simpleLens-big-image"></a>
+											</div>
+											{% endfor %}
+										</div>
+									</div>
+								</div>
+								<div class="quick-thumb">
+									<ul class="product-slider">
+										{% for image in images %}
+										<li><a data-toggle="tab" href="#sin-{{image.id}}"> <img
+													style="width: 85px; height: 106.75px;" src="{{ image }}"
+													alt="small image" /> </a></li>
+		
+										{% endfor %}
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-7 col-md-8">
+							<div class="quick-right">
+								<div class="list-text">
+									<input type="hidden" value="{{ product.id }}" class="Idpro">
+
+									<h3>{{product.title}}</h3>
+									<span>Summer men’s fashion</span>
+									<div class="ratting floatright">
+										<p>( 27 Rating )</p>
+										<i class="mdi mdi-star"></i>
+										<i class="mdi mdi-star"></i>
+										<i class="mdi mdi-star"></i>
+										<i class="mdi mdi-star-half"></i>
+										<i class="mdi mdi-star-outline"></i>
+									</div>
+									<h5 class="priceItem" data-value="{{product.new_price}}"><del>${{product.old_price}}</del> ${{product.new_price}}</h5>
+									<p>{{product.description}}</p>
+									<div class="all-choose">
+										<div class="s-shoose">
+											<h5>Color</h5>
+											<div class="color-select clearfix">
+												{% for product_version in product_versions_query_distinct_color %}
+												<a href="{% url 'single_product' product_version.id %}">
+													{% if product_version.color.title != "WHITE" %}
+														<span style="background: {{ product_version.color }} none repeat scroll 0 0; margin-right: 11.58px; border: 1px {{ product_version.color }} solid;"></span>
+													{% else %}
+														<span style="background: {{ product_version.color }} none repeat scroll 0 0; margin-right: 11.58px; border: 1px black solid;"></span>
+													{% endif %}
+												</a>
+												{% endfor %}
+											</div>
+										</div>
+										<div class="s-shoose">
+											<h5>Size</h5>
+											<div class="size-drop">
+												<div class="btn-group">
+													<button type="button" class="btn">{{product.size|upper }}</button>
+													<button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+														<span class=""><i class="mdi mdi-chevron-down"></i></span>
+													</button>
+													<ul class="dropdown-menu">
+														{% for product_version in product_versions_query_distinct_size %}
+															{% if product_version.size %}
+																<li><a href="{% url 'single_product' product_version.id %}">{{ product_version.size }}</a></li>
+															{% endif %}
+
+														{% endfor %}
+													</ul>
+												</div>
+											</div>
+										</div>
+										<div class="s-shoose">
+											<h5>qty</h5>
+											<form action="#" method="POST">
+												<div class="plus-minus">
+													<label for="quantity"></label>
+													<input type="number" value="1" id="quantity" name="quantity" min="1" max="{{ product.quantity }}" class="plus-minus-box">
+												</div>
+											</form>
+										</div>
+									</div>
+									<div class="list-btn">
+										<a href="#" data="{{product.id}}" class="cartButton"
+										id="cartButton" class="add_to_cart">add to cart</a>
+										<a data="{{product.id}}" class="add_to_wishlist">wishlist</a>
+										<a href="#" data-toggle="modal" data-target="#quick-view">zoom</a>
+									</div>
+									<div class="share-tag clearfix">
+										<ul class="blog-share floatleft">
+											<li><h5>share </h5></li>
+											<li><a href="#"><i class="mdi mdi-facebook"></i></a></li>
+											<li><a href="#"><i class="mdi mdi-twitter"></i></a></li>
+											<li><a href="#"><i class="mdi mdi-linkedin"></i></a></li>
+											<li><a href="#"><i class="mdi mdi-vimeo"></i></a></li>
+											<li><a href="#"><i class="mdi mdi-dribbble"></i></a></li>
+											<li><a href="#"><i class="mdi mdi-instagram"></i></a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- single-product item end -->
+				<!-- reviews area start -->
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="reviews padding60 margin-top">
+							<ul class="reviews-tab clearfix">
+								<li><a data-toggle="tab" href="#moreinfo">more info</a></li>
+								<li class="active"><a data-toggle="tab" href="#reviews">Reviews</a></li>
+								<li><a data-toggle="tab" href="#tags">tags</a></li>
+							</ul>
+							<div class="tab-content">
+								<div class="info-reviews moreinfo tab-pane fade in" id="moreinfo">
+									<p>{{ product.product.description }}</p>
+								</div>
+								<div class="info-reviews review-text tab-pane fade in active" id="reviews">
+									
+									{% for review in reviews %}
+									<div class="about-author">
+										<div class="autohr-text">
+											<img src="{% static 'img/blog/author3.png' %}" alt="" />
+											<div class="author-des">
+												<h4><a href="#">{{ user }}</a></h4>
+												<span class="floatright ratting">
+													<i class="mdi mdi-star">{{ review.rating }}</i>
+												</span>
+												<span class="floatright ">
+													<a href="{% url 'edit_review' review.id %}">EDIT</a>
+												</span>
+												<span>{{ review.created_at }}</span>
+												<p>{{ review.review }}</p>
+											</div>
+										</div>
+									</div>
+									<hr>
+									{% empty %}
+										<p>No Reviews Yet</p>
+									{% endfor %}							
+
+									<div class="your-rating log-title">
+										<h3>leave your review</h3>
+									</div>
+									<div class="custom-input">
+										<form action="" method="post">
+											{% csrf_token %}
+											{{ review_form.non_field_errors }}
+											<div class="row">
+												<div class="col-xs-12">
+													<div class="custom-mess">
+														{{ review_form.review }}
+													</div>
+													<div >
+														<select style="margin-bottom: 20px;" class="btn btn-success" name='star_value'>
+															<option selected="selected" id="rating_1" disabled>Click to select rating</option>
+															<option value="1"><b>&#9733;</b></option>
+															<option value="2"><b>&#9733; &#9733;</b></option>
+															<option value="3"><b>&#9733; &#9733; &#9733;</b></option>
+															<option value="4"><b>&#9733; &#9733; &#9733; &#9733;</b></option>
+															<option value="5"><b>&#9733; &#9733; &#9733; &#9733; &#9733;</b></option>
+														</select>
+													</div>
+												</div>
+												<div class="col-xs-12">
+													<div class="submit-text">
+														<button type="submit">submit review</button>
+													</div>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+								<div class="info-reviews tags tab-pane fade in" id="tags">
+
+									{% for tag in product_version_tags %}
+
+									<a href="{% url 'product' %}?tag_id={{tag.id}}">#{{ tag }}</a>,
+									&nbsp; &nbsp;
+									
+									{% empty %}
+
+									<p>There is no any tag belongs to this product</p>
+
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{% if messages %}
+				<ul class="messages">
+					{% for message in messages %}
+					<li> 
+						{% if message.tags %} 
+						class="alert-{{ message.tags }}"
+						{% endif %}
+						{{ message }}
+					</li>
+					{% endfor %}
+				</ul>
+				{% endif %}
+				<!-- reviews area end -->
+			</div>
+		</div>
+		<!-- product-details section end -->
+        <!-- related-products section start -->
+		<section class="single-products section-padding">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="section-title text-center">
+							<h2>related Products</h2>
+						</div>
+					</div>
+				</div>
+				<div class="row text-center">
+					{% for product in related_products %}
+					<div class="col-xs-12 col-sm-6 col-md-3 r-margin-top">
+						<div class="single-product">
+							<div class="product-img">
+								<a href="#"><img src="{% static 'img/products/4.jpg' %}" alt="{{ product.title }}" /></a>
+								<div class="actions-btn">
+									<a href="#"><i class="mdi mdi-cart"></i></a>
+									<a href="#" data-toggle="modal" data-target="#quick-view"><i class="mdi mdi-eye"></i></a>
+									<a href="#"><i class="mdi mdi-heart"></i></a>
+								</div>
+							</div>
+							<div class="product-dsc">
+								<p><a href="{% url 'single_product' pk=product.id %}">{{ product.title }}</a></p>
+								<span>{{ product.price }}</span>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+					<!-- single product end -->
+				</div>
+			</div>
+		</section>
+		<!-- related-products section end -->
+        <!-- quick view start -->
+		<div class="product-details quick-view modal animated zoomInUp" id="quick-view">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="d-table">
+							<div class="d-tablecell">
+								<div class="modal-dialog">
+									<div class="main-view modal-content">
+										<div class="modal-footer" data-dismiss="modal">
+											<span>x</span>
+										</div>
+										<div class="row">
+											<div class="col-xs-12 col-sm-5 col-md-4">
+												<div class="quick-image">
+													<div class="single-quick-image text-center">
+														<div class="list-img">
+															<div class="product-img tab-content">
+																{% for image in images %}
+																{% if image.is_main %}
+																<div class="simpleLens-container tab-pane active fade in" id="sin-{{image.id}}">
+																{% else %}
+																<div class="simpleLens-container tab-pane fade in" id="sin-{{image.id}}">
+																{% endif %}
+																	<a class="simpleLens-image" data-lens-image="{{ image }}"
+																		href="#"><img style="width: 360px; height: 467px;"
+																			src="{{ image }}" alt="" class="simpleLens-big-image"></a>
+																</div>
+																{% endfor %}
+															</div>
+														</div>
+													</div>
+													<div class="quick-thumb">
+														<ul class="product-slider">
+															{% for image in images %}
+															<li><a data-toggle="tab" href="#sin-{{image.id}}"> <img
+																		style="width: 85px; height: 106.75px;" src="{{ image }}"
+																		alt="small image" /> </a></li>
+							
+															{% endfor %}
+														</ul>
+													</div>
+												</div>						
+											</div>
+											<div class="col-xs-12 col-sm-7 col-md-8">
+												<div class="quick-right">
+													<div class="list-text">
+														<h3>{{product.title}}</h3>
+														<span>Summer men’s fashion</span>
+														<div class="ratting floatright">
+															<p>( 27 Rating )</p>
+															<i class="mdi mdi-star"></i>
+															<i class="mdi mdi-star"></i>
+															<i class="mdi mdi-star"></i>
+															<i class="mdi mdi-star-half"></i>
+															<i class="mdi mdi-star-outline"></i>
+														</div>
+														<h5><del>${{product.old_price}}</del> ${{product.new_price}}</h5>
+														<p>{{product.description}}</p>
+														<div class="all-choose">
+															<div class="s-shoose">
+																<h5>Color</h5>
+																<div class="color-select clearfix">
+																	{% for product_version in product_versions_query_distinct_color %}
+																	<a href="{% url 'single_product' product_version.id %}">
+																		{% if product_version.color.title != "WHITE" %}
+																			<span style="background: {{ product_version.color }} none repeat scroll 0 0; margin-right: 11.58px; border: 1px {{ product_version.color }} solid;"></span>
+																		{% else %}
+																			<span style="background: {{ product_version.color }} none repeat scroll 0 0; margin-right: 11.58px; border: 1px black solid;"></span>
+																		{% endif %}
+																	</a>
+																	{% endfor %}
+																	<span style="display: none" >ikinci</span>
+																</div>
+															</div>
+															<div class="s-shoose">
+																<h5>Size</h5>
+																<div class="size-drop">
+																	<div class="btn-group">
+																		<button type="button" class="btn">{{product.size|upper }}</button>
+																		<button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																			<span class=""><i class="mdi mdi-chevron-down"></i></span>
+																		</button>
+																		<ul class="dropdown-menu">
+																			{% for product_version in product_versions_query_distinct_size %}
+																			{% if product_version.size %}
+																				<li><a href="{% url 'single_product' product_version.id %}">{{ product_version.size }}</a></li>
+																			{% endif %}
+				
+																		{% endfor %}
+																		</ul>
+																	</div>
+																</div>
+															</div>
+															<div class="s-shoose">
+																<h5>qty</h5>
+																<form action="#" method="POST">
+																	<div class="plus-minus">
+																		<!-- <a class="dec qtybutton">-</a> -->
+																		<label for="quantity"></label>
+																		<input type="number" value="02" id="quantity" name="quantity" min="1" max="{{ product.quantity }}" class="plus-minus-box">
+																		<!-- <input type="text" value="02" name="qtybutton" class="plus-minus-box"> -->
+																		<!-- <a class="inc qtybutton">+</a> -->
+																	</div>
+																</form>
+															</div>
+														</div>
+														<div class="list-btn">
+															<a href="#" data="{{product.id}}" class="cartButton"
+															id="cartButton" class="add_to_cart">add to cart</a>
+															<a href="#" data="{{product.id}}" class="add_to_wishlist">wishlist</a>
+															<a href="#" data-toggle="modal" data-target="#quick-view">zoom</a>
+														</div>
+														<div class="share-tag clearfix">
+															<ul class="blog-share floatleft">
+																<li><h5>share </h5></li>
+																<li><a href="#"><i class="mdi mdi-facebook"></i></a></li>
+																<li><a href="#"><i class="mdi mdi-twitter"></i></a></li>
+																<li><a href="#"><i class="mdi mdi-linkedin"></i></a></li>
+																<li><a href="#"><i class="mdi mdi-vimeo"></i></a></li>
+																<li><a href="#"><i class="mdi mdi-dribbble"></i></a></li>
+																<li><a href="#"><i class="mdi mdi-instagram"></i></a></li>
+															</ul>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- quick view end -->
+{% endblock %}

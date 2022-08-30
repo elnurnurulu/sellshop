@@ -1,0 +1,56 @@
+version: '3.1'
+
+services: 
+    nginx:
+        build: ./nginx
+        ports:
+          - 80:80
+        depends_on:
+          - web
+        volumes:
+          - ./static/:/code/static/
+          - ./media/:/code/media/
+          
+    db:
+        image: postgres
+        restart: always
+        ports:
+          - "5432:5432"
+        volumes:
+          - ./pgdb/:/var/lib/postgresql/data
+        environment: 
+          POSTGRES_PASSWORD: 12345
+          POSTGRES_USER: user
+          POSTGRES_DB: sellshop
+
+    web:
+        build: .
+        command:  gunicorn --bind 0.0.0.0 -p 8000 sellshop.wsgi
+        ports: 
+            - 8000:8000
+        depends_on:
+            - "db"
+            - "redisdb"
+        env_file: .env
+
+    celery:
+        build: 
+            context: .
+            dockerfile: celery.dockerfile
+        command:  celery -A sellshop worker --beat --scheduler django --loglevel=info
+        depends_on:
+            - "db"
+            - "redisdb"
+        env_file: .env
+
+    adminer:
+        image: adminer
+        restart: always
+        ports:
+            - 8080:8080 
+
+    redisdb:
+        image: redis
+        restart: always
+        ports:
+            - 6379:6379

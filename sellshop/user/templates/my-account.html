@@ -1,0 +1,221 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- pages-title-start -->
+<div class="pages-title section-padding">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="pages-title-text text-center">
+					<h2>My Account</h2>
+					<ul class="text-left">
+						<li><a href="{% url 'index' %}">Home </a></li>
+						<li><span> // </span>My Account</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- pages-title-end -->
+<!-- My account content section start -->
+<section class="pages my-account-page section-padding">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-6">
+				<div class="padding60">
+					<div class="log-title">
+						<h3><strong>My Account</strong></h3>
+					</div>
+					<div class="prament-area main-input">
+						<ul class="panel-group" id="accordion">
+							<li class="panel">
+								<div class="account-title" data-toggle="collapse" data-parent="#accordion"
+									data-target="#collapse1">
+									<label>
+										<input type="radio" checked value="forever" name="rememberme" />
+										add my frist address
+									</label>
+								</div>
+								<div id="collapse1" class="panel-collapse collapse in">
+									<div class="single-log-info">
+										<div class="bulling-title">
+											<h5>Billing Address</h5>
+											<p>To add a new address, please fill out the form below.</p>
+										</div>
+										<div class="custom-input">
+											<form action="" method="POST">
+												{% csrf_token %}
+												{{ form_acc.non_field_errors }}
+												<div class="row">
+													<div class="col-md-6">
+														<label for="billing:firstname"> First Name <span
+																class="required">*</span> </label>
+														{{form_acc.first_name}}
+														{{form_acc.errors.first_name}}
+													</div>
+													<div class="col-md-6">
+														<label for="billing:lastname"> Last Name <span
+																class="required">*</span> </label>
+														{{form_acc.last_name}}
+														{{form_acc.errors.last_name}}
+													</div>
+												</div>
+												<div>
+													<label for="billing:postcode">Zip/Postal Code <span
+															class="required">*</span></label>
+													{{form_acc.zipcode}}
+													{{form_acc.zipcode.errors}}
+												</div>
+												<div class="custom-select">
+													<label for="billing:country_id">Country <span
+															class="required">*</span></label>
+													{{form_acc.country}}
+													{{form_acc.errors.country}}
+												</div>
+												<div>
+													<label>Address <span class="required">*</span></label>
+
+													{{form_acc.address}}
+													{{form_acc.errors.address}}
+												</div>
+												<div>
+													<label for="billing:city">City <span
+															class="required">*</span></label>
+													{{form_acc.city}}
+													{{form_acc.errors.city}}
+												</div>
+												<p class="red-color">** You must register at least one phone number.</p>
+												<div>
+													<label for="billing:telephone">Telephone <span
+															class="required">*</span></label>
+													{{form_acc.phone}}
+													{{form_acc.phone.errors}}
+												</div>
+												<!-- <div class="custom-mess">
+													{{form_acc.information}}
+												</div> -->
+												<label>Please assign an address title for future
+													reference.<sup>*</sup></label>
+												<!-- <div class="input-text">
+													{{form_acc.reference}}
+												</div> -->
+												{{form.is_default}}
+												<p class="require"><em class="required">* </em>Required Fields</p>
+												{{form.errors}}
+												<div class="submit-text">
+													<button type="submit" value='address'>Save</button>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li class="panel panelimg">
+								<div class="account-title" data-toggle="collapse" data-parent="#accordion"
+									data-target="#collapse2">
+									<label>
+										<input type="radio" value="forever" name="rememberme" />
+										My credit slips
+									</label>
+								</div>
+								<div id="collapse2" class="paypal-dsc panel-collapse collapse">
+									<div class="prayment-dsc">
+										<div class="bulling-title">
+											<h5>Order history</h5>
+										</div>
+										<p>Here are the orders you've placed since your account was created.</p>
+										<span>You have not placed any orders.</span>
+									</div>
+								</div>
+							</li>
+							<li class="panel panelimg">
+								<div class="account-title" data-toggle="collapse" data-parent="#accordion"
+									data-target="#collapse3">
+									<label>
+										<input type="radio" value="forever" name="rememberme" />
+										my address
+									</label>
+								</div>
+								<div id="collapse3" class="paypal-dsc panel-collapse collapse">
+									<div class="prayment-dsc">
+										<div class="bulling-title">
+											<h5>Order history</h5>
+										</div>
+										<p>Here are the orders you've placed since your account was created.</p>
+										<span>You have not placed any orders.</span>
+									</div>
+								</div>
+							</li>
+							<li class="panel">
+								<div class="account-title" data-toggle="collapse" data-parent="#accordion"
+									data-target="#collapse4">
+									<label>
+										<input type="radio" value="forever" name="rememberme" />
+										My personal information
+									</label>
+								</div>
+								<div id="collapse4" class="panel-collapse collapse">
+									<div class="single-log-info">
+										<div class="bulling-title">
+											<h5>Your personal information</h5>
+											<p>Please be sure to update your personal information if it has changed</p>
+										</div>
+										<div class="custom-input">
+											<form action="" method="post">
+												{% csrf_token %}
+												{{ form_pers_info.non_field_errors }}
+												{% for field in form_pers_info %}
+												<div class="form-group">
+													{{field}}
+													<ul>
+														{% for error in field.errors %}
+														<li>{{error}}</li>
+														{% endfor %}
+													</ul>
+												</div>
+												{% endfor %}
+												<div class="row">
+													<div class="col-xs-12">
+														<div class="sing-checkbox">
+															<label>
+																<input type="checkbox" name="rememberme" />
+																Sign up for our newsletter!
+															</label>
+															<label>
+																<input type="checkbox" name="rememberme" />
+																Receive special offers from our partners!
+															</label>
+														</div>
+													</div>
+												</div>
+												<div class="submit-text text-left">
+													<button type="submit" name='submit'
+														value="personal_info_submit">Save</button>
+												</div>
+												<div class="submit-text text-left">
+													<button type="submit" value="">
+														<a href="{% url 'password_change' %}">Click to change
+															Password</a> </button>
+													<<<<<<< HEAD======={{ user.first_name }}>>>>>>> elnur_multilan
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				<div class="my-right-side">
+					<a href="{% url 'wishlist' %}">My wishlists</a>
+					<a href="{% url 'cart' %}">Order history and details</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- my account content section end -->
+{% endblock %}

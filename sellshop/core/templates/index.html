@@ -1,0 +1,481 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% load custom_tags %}
+{% block content %}
+<!-- slider-section-start -->
+<div class="main-slider-one main-slider-two slider-area">
+	<div id="wrapper">
+		<div class="slider-wrapper">
+			<div id="mainSlider" class="nivoSlider">
+				<img src="{% static 'img/slider/dddddddddddddddddddd.jpg' %}" alt="main slider" title="#htmlcaption" />
+				<img src="{% static 'img/slider/home2/22222222222222222222222222.png' %}" alt="main slider" title="#htmlcaption2" />
+			</div>
+			<div id="htmlcaption" class="nivo-html-caption slider-caption">
+				<div class="container">
+					<div class="slider-left slider-right">
+						<div class="slide-text animated zoomInUp">
+							<h3>new collection</h3>
+							<h1>Men’s Fashion 2016</h1>
+						</div>
+						<div class="animated slider-btn fadeInUpBig">
+							<a class="shop-btn" href="{% url 'product' %}">{% trans 'Shop now' %}</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="htmlcaption2" class="nivo-html-caption slider-caption">
+				<div class="container">
+					<div class="slider-left two-caption-text slider-right">
+						<div class="slide-text animated zoomInUp">
+							<h3>new collection</h3>
+							<h1>'Men’s Fashion 2016</h1>
+							<span>{% trans 'Starting at $65.00. Don’t miss out!' %}</span>
+						</div>
+						<div class="one-p animated bounceInLeft">
+							<p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those
+								interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum".</p>
+						</div>
+						<div class="animated slider-btn fadeInUpBig">
+							<a class="shop-btn" href="{% url 'product' %}">{% trans 'Shop now' %}</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- slider section end -->
+
+<!-- featured-products section start -->
+<section class="single-products  products-two section-padding extra-padding-bottom">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="section-title text-center">
+					{% if featured_products %}
+					<h2>{% trans 'Featured Products'%}</h2>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+		<div class="wrapper">
+			<ul class="load-list load-list-one">
+				<li>
+					<div class="row text-center">
+						{% for productversion in featured_products %}
+
+						<div class="col-xs-12 col-sm-6 col-md-3">
+							<div class="single-product">
+								<div class="product-img">
+									{% if product.discount %}
+									<div class="pro-type sell">
+										<span> sale </span>
+									</div>
+									{% endif %}
+									{% for image in productversion.product_images.all %}
+									{% if image.is_main %}
+									<a href="{% url 'single_product' productversion.id %}">
+										<img style="width: 263px; height: 340px;" src="{{image.image.url}}"
+											alt="Product Title" />
+									</a>
+									{% endif %}
+									{% endfor %}
+									<div class="actions-btn">
+										<a><i data="{{productversion.id}}" class="mdi mdi-cart add_to_cart " class="cartButton"
+											id="cartButton" ></i></a>
+
+										<a><i data="{{productversion.id}}"
+												class="mdi mdi-heart add_to_wishlist"></i></a>
+									</div>
+								</div>
+								<div class="product-dsc">
+									<p><a
+											href="{% url 'single_product' productversion.id %}">{{ productversion.title }}</a>
+									</p>
+									<span>{{productversion.new_price}}</span>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+						<!-- single product end -->
+
+					</div>
+				</li>
+			</ul>
+			<!-- <button id="load-more-one">Load More</button> -->
+		</div>
+	</div>
+</section>
+<!-- featured-products section end -->
+
+<!-- tab-products section start -->
+<div class="tab-products single-products products-two section-padding extra-padding-top">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="section-title text-center">
+					<div class="product-tab nav nav-tabs">
+						<ul>
+							<li class="active"><a data-toggle="tab" href="#arrival">{% trans 'New Arrival' %} <span>//</span></a></li>
+							<li><a data-toggle="tab" href="#popular">{% trans 'Popular Product' %} <span>//</span></a></li>
+							<li><a data-toggle="tab" href="#best">{% trans 'Best Seller' %}</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="text-center tab-content">
+			<div class="tab-pane  fade in active" id="arrival">
+				<div class="wrapper">
+					<ul class="load-list load-list-two">
+						<li>
+							<div class="row text-center">
+								{% for productversion in new_arrivals %}
+								<div class="col-xs-12 col-sm-6 col-md-3 r-margin-top">
+									<div class="single-product">
+										<div class="product-img">
+											{% if product.discount %}
+											sdsds
+											<div class="pro-type sell">
+												<span> sale </span>
+											</div>
+											{% endif %}
+										</div>
+										{% for image in productversion.product_images.all %}
+										{% if image.is_main %}
+										<a href="{% url 'single_product' productversion.id %}">
+
+											<img src="{{image.image.url}}" alt="Product Title" />
+										</a>
+										{% endif %}
+										{% endfor %}
+										<div class="actions-btn">
+											<a><i data="{{productversion.id}}"
+													class="mdi mdi-cart add_to_cart "></i></a>
+											<a><i data="{{productversion.id}}"
+													class="mdi mdi-heart add_to_wishlist"></i></a>
+										</div>
+									</div>
+									<div class="product-dsc">
+										<p><a
+												href="{% url 'single_product' productversion.id %}">{{ productversion.title }}</a>
+										</p>
+										<span>${{productversion.new_price}}</span>
+									</div>
+								</div>
+								{% endfor %}
+							</div>
+
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- <button id="load-more-two">Load More</button> -->
+			<!-- arrival product end -->
+			<div class="tab-pane fade" id="popular">
+				<div class="wrapper">
+					<ul class="load-list load-list-three">
+						<li>
+							<div class="row text-center">
+								{% for productversion in mostreview %}
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="single-product">
+										<div class="product-img">
+											{% if productversion.discount %}
+											<div class="pro-type sell">
+												<span> sale </span>
+											</div>
+											{% endif %}
+											{% for image in productversion.product_images.all %}
+											{% if image.is_main %}
+											<a href="{% url 'single_product' productversion.id %}">
+												<img src="{{image.image.url}}" alt="Product Title" />
+											</a>
+											{% endif %}
+
+											{% endfor %}
+											<div class="actions-btn">
+												<a><i data="{{productversion.id}}"
+														class="mdi mdi-cart add_to_cart "></i></a>
+												<a><i data="{{productversion.id}}"
+														class="mdi mdi-heart add_to_wishlist"></i></a>
+											</div>
+										</div>
+										<div class="product-dsc">
+											<p><a
+													href="{% url 'single_product' productversion.id %}">{{productversion.title}}</a>
+											</p>
+											<span>${{productversion.new_price}}</span>
+										</div>
+									</div>
+								</div>
+								<!-- single product end -->
+								{% endfor %}
+							</div>
+						</li>
+					</ul>
+					<!-- <button id="load-more-three">Load More</button> -->
+				</div>
+			</div>
+			<!-- popular product end -->
+			<div class="tab-pane fade" id="best">
+				<div class="wrapper">
+					<ul class="load-list load-list-four">
+						<li>
+							<div class="row text-center">
+								{% for product in bestseller %}
+								<div class="col-xs-12 col-sm-6 col-md-3">
+									<div class="single-product">
+										<div class="product-img">
+											{% if product.discount %}
+											<div class="pro-type sell">
+												<span> sale </span>
+											</div>
+											{% endif %}
+											{% for image in product.product_images.all %}
+											{% if image.is_main %}
+											<a href="{% url 'single_product' product.id %}">
+												<img src="{{image.image.url}}" alt="Product Title" />
+											</a>
+											{% endif %}
+											{% endfor %}
+											<div class="actions-btn">
+												<a><i data="{{productversion.id}}"
+														class="mdi mdi-cart add_to_cart "></i></a>
+												<a><i data="{{productversion.id}}"
+														class="mdi mdi-heart add_to_wishlist"></i></a>
+											</div>
+										</div>
+										<div class="product-dsc">
+											<p><a href="{% url 'single_product' product.id %}">{{product.title}}</a>
+											</p>
+											<span>${{product.new_price}}</span>
+										</div>
+									</div>
+								</div>
+								{% endfor %}
+								<!-- single product end -->
+
+								<!-- single product end -->
+							</div>
+						</li>
+					</ul>
+					<!-- <button id="load-more-four">Load More</button> -->
+				</div>
+			</div>
+			<!-- popular product end -->
+		</div>
+	</div>
+</div>
+<!-- tab-products section end -->
+<!-- blog section start -->
+<section class="latest-blog section-padding">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="section-title text-center">
+					<h2>Latest Blog</h2>
+				</div>
+			</div>
+		</div>
+		<div class="wrapper">
+			<ul class="load-list load-list-blog">
+				<li>
+					<div class="row" id="latestblog">
+						{% get_blogs 0 3 -1 as blogs %}
+								{% for blog in blogs %}
+								<div class="col-sm-4">
+									<div class="l-blog-text">
+										<div class="banner"><a href="{% url 'blog_detail' slug=blog.slug %}"><img src="{{ blog.image.url }}" alt="" /></a></div>
+										<div class="s-blog-text">
+											<h4><a href="{% url 'blog_detail' slug=blog.slug %}"> {{ blog.title }} {{ blog.id }}</a></h4>
+											<span>By : <a href="#">{{blog.author}}</a> | <a href="#">210 Like</a> | <a href="#">69 Comments</a></span>
+											<p>{{ blog.description }}</p>
+										</div>
+										<div class="date-read clearfix">
+											<a href="#"><i class="mdi mdi-clock"></i>{{ blog.created_at | date:"F d, Y"  }}</a>
+											<a href="{% url 'blog_detail' slug=blog.slug %}">read more</a>
+										</div>
+									</div>
+								</div>
+								{% endfor %}
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</section>
+<!-- blog section end -->
+<!-- quick view start -->
+<div class="product-details quick-view modal animated zoomInUp" id="quick-view">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="d-table">
+					<div class="d-tablecell">
+						<div class="modal-dialog">
+							<div class="main-view modal-content">
+								<div class="modal-footer" data-dismiss="modal">
+									<span>x</span>
+								</div>
+								<div class="row">
+									<div class="col-xs-12 col-sm-5 col-md-4">
+										<div class="quick-image">
+											<div class="single-quick-image text-center">
+												<div class="list-img">
+													<div class="product-img tab-content">
+														<div class="simpleLens-container tab-pane fade in" id="sin-1">
+															<div class="pro-type">
+																<span>new</span>
+															</div>
+															<a class="simpleLens-image"
+																data-lens-image="img/products/z1.jpg' %}" href="#"><img
+																	src="{% static 'img/products/z1.jpg' %}" alt=""
+																	class="simpleLens-big-image"></a>
+														</div>
+														<div class="simpleLens-container tab-pane active fade in"
+															id="sin-2">
+															<div class="pro-type sell">
+																<span>sell</span>
+															</div>
+															<a class="simpleLens-image"
+																data-lens-image="img/products/z2.jpg" href="#"><img
+																	src="{% static 'img/products/z2.jpg' %}" alt=""
+																	class="simpleLens-big-image"></a>
+														</div>
+														<div class="simpleLens-container tab-pane fade in" id="sin-3">
+															<div class="pro-type">
+																<span>-15%</span>
+															</div>
+															<a class="simpleLens-image"
+																data-lens-image="img/products/z3.jpg' %}" href="#"><img
+																	src="{% static 'img/products/z3.jpg' %}" alt=""
+																	class="simpleLens-big-image"></a>
+														</div>
+														<div class="simpleLens-container tab-pane fade in" id="sin-4">
+															<div class="pro-type">
+																<span>new</span>
+															</div>
+															<a class="simpleLens-image"
+																data-lens-image="img/products/z4.jpg' %}" href="#"><img
+																	src="{% static 'img/products/z4.jpg' %}" alt=""
+																	class="simpleLens-big-image"></a>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="quick-thumb">
+												<ul class="product-slider">
+													<li><a data-toggle="tab" href="#sin-1"> <img
+																src="{% static 'img/products/s1.jpg' %}"
+																alt="quick view" /> </a></li>
+													<li class="active"><a data-toggle="tab" href="#sin-2"> <img
+																src="{% static 'img/products/s2.jpg' %}"
+																alt="small image" /> </a></li>
+													<li><a data-toggle="tab" href="#sin-3"> <img
+																src="{% static 'img/products/s3.jpg' %}"
+																alt="small image" /> </a></li>
+													<li><a data-toggle="tab" href="#sin-4"> <img
+																src="{% static 'img/products/s4.jpg' %}"
+																alt="small image" /> </a></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+									<div class="col-xs-12 col-sm-7 col-md-8">
+										<div class="quick-right">
+											<div class="list-text">
+												<h3>men’s White t-shirt</h3>
+												<span>Summer men’s fashion</span>
+												<div class="ratting floatright">
+													<p>( 27 Rating )</p>
+													<i class="mdi mdi-star"></i>
+													<i class="mdi mdi-star"></i>
+													<i class="mdi mdi-star"></i>
+													<i class="mdi mdi-star-half"></i>
+													<i class="mdi mdi-star-outline"></i>
+												</div>
+												<h5><del>$79.30</del> $69.30</h5>
+												<p>There are many variations of passages of Lorem Ipsum available, but
+													the majority have be suffered alteration in some form, by injected
+													humour, or randomised words which donot look even slightly
+													believable. If you are going to use a passage of Lorem Ipsum, you
+													neede be sure there isn't anything embarrassing hidden in the middle
+													of text. Lorem Ipsum is simply dummy text of the printing and
+													typesetting industry.</p>
+												<div class="all-choose">
+													<div class="s-shoose">
+														<h5>Color</h5>
+														<div class="color-select clearfix">
+															<span></span>
+															<span class="outline"></span>
+															<span></span>
+															<span></span>
+														</div>
+													</div>
+													<div class="s-shoose">
+														<h5>size</h5>
+														<div class="size-drop">
+															<div class="btn-group">
+																<button type="button" class="btn">XL</button>
+																<button type="button" class="btn dropdown-toggle"
+																	data-toggle="dropdown" aria-haspopup="true"
+																	aria-expanded="false">
+																	<span class=""><i
+																			class="mdi mdi-chevron-down"></i></span>
+																</button>
+																<ul class="dropdown-menu">
+																	<li><a href="#">Xl</a></li>
+																	<li><a href="#">SL</a></li>
+																	<li><a href="#">S</a></li>
+																	<li><a href="#">L</a></li>
+																</ul>
+															</div>
+														</div>
+													</div>
+													<div class="s-shoose">
+														<h5>qty</h5>
+														<form action="#" method="POST">
+															<div class="plus-minus">
+																<a class="dec qtybutton">-</a>
+																<input type="text" value="02" name="qtybutton"
+																	class="plus-minus-box">
+																<a class="inc qtybutton">+</a>
+															</div>
+														</form>
+													</div>
+												</div>
+												<div class="list-btn">
+													<a href="#">add to cart</a>
+													<a href="#">wishlist</a>
+													<a href="#">zoom</a>
+												</div>
+												<div class="share-tag clearfix">
+													<ul class="blog-share floatleft">
+														<li>
+															<h5>share </h5>
+														</li>
+														<li><a href="#"><i class="mdi mdi-facebook"></i></a></li>
+														<li><a href="#"><i class="mdi mdi-twitter"></i></a></li>
+														<li><a href="#"><i class="mdi mdi-linkedin"></i></a></li>
+														<li><a href="#"><i class="mdi mdi-vimeo"></i></a></li>
+														<li><a href="#"><i class="mdi mdi-dribbble"></i></a></li>
+														<li><a href="#"><i class="mdi mdi-instagram"></i></a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- quick view end -->
+{% endblock %}

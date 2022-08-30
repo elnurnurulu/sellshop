@@ -1,0 +1,372 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-07-14 07:14+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: blog/templates/blog.html:12 blog/templates/single-blog.html:12
+#: core/templates/base.html:146 core/templates/base.html:212
+msgid "Home"
+msgstr "Ana səhifə"
+
+#: blog/templates/blog.html:13 blog/templates/single-blog.html:13
+#: core/templates/base.html:196
+msgid "Blog"
+msgstr "Bloq"
+
+#: blog/templates/single-blog.html:99
+msgid "leave your review"
+msgstr "Rəyini bildir"
+
+#: blog/templates/single-blog.html:109
+msgid "submit comments"
+msgstr "Rəyini göndər"
+
+#: blog/templates/single-blog.html:123 product/models.py:17
+msgid "Categories"
+msgstr "Kateqoriyalar"
+
+#: blog/templates/single-blog.html:154
+msgid "brands"
+msgstr "Brandlar"
+
+#: blog/templates/single-blog.html:155
+msgid "All"
+msgstr "Hamısı"
+
+#: blog/templates/single-blog.html:169
+msgid "recent post"
+msgstr "Son post"
+
+#: blog/templates/single-blog.html:187
+msgid "best"
+msgstr "Ən yaxşı"
+
+#: blog/templates/single-blog.html:204
+msgid "Related Blogs"
+msgstr "Əlaqəli Bloqlar"
+
+#: blog/templates/single-blog.html:223
+msgid "read more"
+msgstr "Daha çoxu"
+
+#: core/models.py:23 user/forms.py:24
+msgid "Email"
+msgstr "Email"
+
+#: core/templates/base.html:101 core/templates/base.html:113
+msgid "My account"
+msgstr "Hesabım"
+
+#: core/templates/base.html:103
+msgid "Login"
+msgstr "Daxil ol"
+
+#: core/templates/base.html:104
+msgid "Registar"
+msgstr "Qeydiyyatdan keç"
+
+#: core/templates/base.html:112 core/templates/base.html:405
+msgid "Logout"
+msgstr "Çıxış"
+
+#: core/templates/base.html:114
+msgid "My cart"
+msgstr "Kartlarım"
+
+#: core/templates/base.html:115 core/templates/base.html:411
+msgid "Check out"
+msgstr "Yoxla"
+
+#: core/templates/base.html:117
+msgid "My wishlist"
+msgstr "İstək listi"
+
+#: core/templates/base.html:125
+msgid "Search within these results..."
+msgstr "Bu nəticələr daxilində axtarın"
+
+#: core/templates/base.html:152 core/templates/base.html:218
+msgid "Shop"
+msgstr "Mağaza"
+
+#: core/templates/base.html:157 core/templates/base.html:221
+msgid "men’s wear"
+msgstr "Kişi geyimi"
+
+#: core/templates/base.html:159 core/templates/base.html:172
+#: core/templates/base.html:223 core/templates/base.html:236
+msgid "Shirts & Top"
+msgstr "Köynəklər"
+
+#: core/templates/base.html:160 core/templates/base.html:173
+#: core/templates/base.html:224 core/templates/base.html:237
+msgid "Shoes"
+msgstr "Ayaqqabılar"
+
+#: core/templates/base.html:161 core/templates/base.html:174
+#: core/templates/base.html:225 core/templates/base.html:238
+msgid "Dresses"
+msgstr "DOnlar"
+
+#: core/templates/base.html:162 core/templates/base.html:175
+#: core/templates/base.html:226 core/templates/base.html:239
+msgid "Shemwear"
+msgstr "Qadın paltarı"
+
+#: core/templates/base.html:163 core/templates/base.html:176
+#: core/templates/base.html:227 core/templates/base.html:240
+msgid "Jeans"
+msgstr "Cins"
+
+#: core/templates/base.html:164 core/templates/base.html:177
+#: core/templates/base.html:228 core/templates/base.html:241
+msgid "Sweaters"
+msgstr "Svitirlər"
+
+#: core/templates/base.html:165 core/templates/base.html:178
+#: core/templates/base.html:229 core/templates/base.html:242
+msgid "Jacket"
+msgstr "Jaket"
+
+#: core/templates/base.html:166 core/templates/base.html:230
+msgid "Men Watch"
+msgstr "Kişi saatı"
+
+#: core/templates/base.html:170 core/templates/base.html:234
+msgid "women’s wear"
+msgstr "Qadın geyimi"
+
+#: core/templates/base.html:179 core/templates/base.html:243
+msgid "Women Watch"
+msgstr "Qadın saatı"
+
+#: core/templates/base.html:186 core/templates/base.html:248
+msgid "Pages"
+msgstr "Səhifələr"
+
+#: core/templates/base.html:188 core/templates/base.html:250
+msgid "Wishlist"
+msgstr "İstək listi"
+
+#: core/templates/base.html:189 core/templates/base.html:251
+msgid "Checkout"
+msgstr "Yoxla"
+
+#: core/templates/base.html:190 core/templates/base.html:252
+msgid "Cart"
+msgstr "Kart"
+
+#: core/templates/base.html:192
+msgid "Product"
+msgstr "Produkt"
+
+#: core/templates/base.html:202 core/templates/base.html:266
+msgid "About"
+msgstr "Haqqımızda"
+
+#: core/templates/base.html:203 core/templates/base.html:267
+msgid "Contact"
+msgstr "Əlaqə"
+
+#: core/templates/base.html:253
+msgid "Product Grid View"
+msgstr "Məhsul Grid Görünüşü"
+
+#: core/templates/base.html:254
+msgid "Product List View"
+msgstr "Məhsul List Görünüşü"
+
+#: core/templates/base.html:310
+msgid "newsletter"
+msgstr "Xəbərlər"
+
+#: core/templates/base.html:342
+msgid "get in touch"
+msgstr "Əlaqədə ol"
+
+#: core/templates/base.html:373
+msgid "Contact us"
+msgstr "Əlaqə qur"
+
+#: core/templates/base.html:399
+msgid "my account"
+msgstr "Hesabım"
+
+#: core/templates/base.html:407
+msgid "My Account"
+msgstr "Hesabım"
+
+#: core/templates/base.html:409
+msgid "My Cart"
+msgstr "Kartlarım"
+
+#: core/templates/base.html:414
+msgid "Sign In"
+msgstr "Daxil ol"
+
+#: core/templates/base.html:416
+msgid "Track My Orders"
+msgstr "Sifarişlərini izlə"
+
+#: core/templates/base.html:420
+msgid "My Wishlist"
+msgstr "İstək listim"
+
+#: core/templates/base.html:429
+msgid "shipping"
+msgstr "Çatdırılma"
+
+#: core/templates/base.html:434
+msgid "New Products"
+msgstr "Yeni məhsullar"
+
+#: core/templates/base.html:435
+msgid "Top Sellers"
+msgstr "Ən çox satılanlar"
+
+#: core/templates/base.html:438
+msgid "Manufactirers"
+msgstr "İstehsalçılar"
+
+#: core/templates/base.html:439
+msgid "Suppliers"
+msgstr "Təchizatçılar"
+
+#: core/templates/base.html:441
+msgid "Specials"
+msgstr "Xüsusi"
+
+#: core/templates/base.html:443
+msgid "Availability"
+msgstr "Mövcudluq"
+
+#: core/templates/base.html:452
+msgid "Information"
+msgstr "Məlumat"
+
+#: core/templates/base.html:457
+msgid "Return Exchange"
+msgstr "Qaytarma Mübadilə"
+
+#: core/templates/base.html:460
+msgid "Fast Delivery"
+msgstr "Sürətli çatdırılma"
+
+#: core/templates/base.html:462
+msgid "Online Shopping"
+msgstr "Online alış-veriş"
+
+#: core/templates/base.html:465
+msgid "Shipping Guide"
+msgstr "Göndərmə Bələdçisi"
+
+#: core/templates/base.html:466
+msgid "Turm Of Use"
+msgstr "İstifadə müddəti"
+
+#: core/templates/base.html:469
+msgid "Home Delivery"
+msgstr "Evə Çatdırılma"
+
+#: core/templates/index.html:17 core/templates/index.html:30
+msgid "new collection"
+msgstr "yeni kolleksiya"
+
+#: core/templates/index.html:18 core/templates/index.html:31
+msgid "Men’s Fashion 2016"
+msgstr "Kişi Moda 2016"
+
+#: core/templates/index.html:21 core/templates/index.html:39
+#, fuzzy
+#| msgid "Shop"
+msgid "Shop now"
+msgstr "Mağaza"
+
+#: core/templates/index.html:32
+msgid "Starting at $65.00. Don’t miss out!"
+msgstr "$65.00-dan başlayaraq. Qaçırmayın!"
+
+#: core/templates/index.html:55
+#, fuzzy
+#| msgid "New Products"
+msgid "Featured Products"
+msgstr "Yeni məhsullar"
+
+#: core/templates/index.html:117
+msgid "New Arrival"
+msgstr "Yeni Gəliş"
+
+#: core/templates/index.html:118
+#, fuzzy
+#| msgid "Product"
+msgid "Popular Product"
+msgstr "Produkt"
+
+#: core/templates/index.html:119
+#, fuzzy
+#| msgid "Top Sellers"
+msgid "Best Seller"
+msgstr "Ən çox satılanlar"
+
+#: product/models.py:16
+msgid "Category"
+msgstr "Kateqoriya"
+
+#: sellshop/settings.py:234
+msgid "English"
+msgstr "İngilis dili"
+
+#: sellshop/settings.py:235
+msgid "Azerbaijan"
+msgstr "Azərbaycan"
+
+#: user/admin.py:12
+msgid "Personal info"
+msgstr "Şəxsi məlumat"
+
+#: user/admin.py:13
+msgid "Permissions"
+msgstr "İcazələr"
+
+#: user/admin.py:16
+msgid "Important dates"
+msgstr "Əhəmiyyətli tarixlər"
+
+#: user/templates/email/reset-password-mail.html:3
+#, python-format
+msgid ""
+"You're receiving this email because you requested a password reset for your "
+"user account at %(site_name)s."
+msgstr ""
+
+#: user/templates/email/reset-password-mail.html:5
+msgid "Please go to the following page and choose a new password:"
+msgstr "Zəhmət olmasa aşağıdakı səhifəyə keçin və yeni parol seçin:"
+
+#: user/templates/email/reset-password-mail.html:9
+msgid "Your username, in case you’ve forgotten:"
+msgstr "İstifadəçi adınız, unutmusunuzsa:"
+
+#: user/templates/email/reset-password-mail.html:11
+msgid "Thanks for using our site!"
+msgstr "Saytımızdan istifadə etdiyiniz üçün təşəkkür edirik!"
+
+#: user/templates/email/reset-password-mail.html:13
+#, python-format
+msgid "The %(site_name)s team"
+msgstr ""

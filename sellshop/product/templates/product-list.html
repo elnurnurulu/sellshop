@@ -1,0 +1,418 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_tags %}
+{% block content %}
+<!-- pages-title-start -->
+<div class="pages-title section-padding">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="pages-title-text text-center">
+					<h2>Product List View</h2>
+					<ul class="text-left">
+						<li><a href="{% url 'index' %}">Home </a></li>
+						<li><span> // </span>Shop</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- pages-title-end -->
+
+<!-- product-list-view content section start -->
+<section class="pages products-page section-padding-bottom">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-4 col-md-3">
+				<div class="sidebar left-sidebar">
+					<div class="s-side-text">
+						<div class="sidebar-title clearfix">
+							<h4 class="floatleft"><a href="{% url 'product' %}"><button class="btn btn-danger">ALL&nbsp;</button></a></h4>
+							<h4 class="floatleft"><a href="{% url 'product' %}?&discount=True"><button style="margin-left: 85px;" class="btn btn-danger">SALE</button></a></h4>
+							
+						</div>
+						<div class="sidebar-title clearfix">
+							<h4 class="floatleft">Categories</h4>
+							
+						</div>
+						<div class="categories left-right-p">
+
+							{% for category in categories %}
+							{% if category.parent_cat is null %}
+							<ul id="accordion" class="panel-group clearfix">
+								<li class="panel">
+									<div data-toggle="collapse" data-parent="#accordion"
+										data-target="#collapse{{category.id}}">
+										<div class="medium-a">
+											<a
+												href="{% url 'product' %}?{{request.GET.urlencode}}&category_id={{category.id}}">
+												{{category.title}} <span>{{category.product_count}}</span></a>
+										</div>
+									</div>
+									<div class=" panel-collapse collapse " id="collapse{{category.id}}">
+										<div class="normal-a">
+											{% for subcat in categories %}
+											{% if subcat.parent_cat == category %}
+											<a href="#">{{subcat}}</a>
+											{% endif %}
+											{% endfor %}
+										</div>
+									</div>
+								</li>
+
+							</ul>
+							{% endif %}
+							{% endfor %}
+
+						</div>
+					</div>
+                    <div class="s-side-text">
+                        <div class="sidebar-title">
+                            <h4>price</h4>
+                        </div>
+						<form action="">
+                        <div style="margin-top: 10%;">
+								<input type="text" name="min_price" placeholder="Min. price" maxlength="14" size="13" >
+								<input type="text" name="max_price" placeholder="Max. price" maxlength="14" size="13"> 
+								<input type="submit" value="Go">
+                        </div>
+						</form>
+                    </div>
+
+					<div class="s-side-text">
+						<div class="sidebar-title clearfix">
+							<h4 class="floatleft">size</h4>
+							
+						</div>
+						<div class="size-select clearfix">
+							{% for size in sizes %}
+							<a href="{% url 'product' %}?{{request.GET.urlencode}}&size_id={{size.id}}" >{{ size.title }}</a>
+							{% endfor %}
+						</div>
+					</div>
+
+					<div class="s-side-text">
+						<div class="sidebar-title clearfix">
+							<h4 class="floatleft">color</h4>
+							
+						</div>
+						<div class="color-select clearfix">
+							{% for color in colors %}
+							<a href="{% url 'product' %}?{{request.GET.urlencode}}&color_id={{color.id}}" style="margin-right: 11.58px;">
+								{% if color.title != "WHITE" %}
+								<span style="background: {{ color }} none repeat scroll 0 0; margin-right: 11.58px; border: 1px {{ color }} solid;"></span>
+								{% else %}
+								<span style="background: {{ color }} none repeat scroll 0 0; margin-right: 11.58px; border: 1px black solid;"></span>
+								{% endif %}
+							</a>
+							{% endfor %}
+						</div>
+					</div>
+
+					<div class="s-side-text">
+						<div class="sidebar-title clearfix">
+							<h4 class="floatleft">brands</h4>
+							
+						</div>
+						<div class="brands-select clearfix">
+							<ul>
+
+								{% for brand in brands %}
+								<li>
+									<a href="{% url 'product' %}?{{request.GET.urlencode}}&brand_id={{brand.id}}">{{brand}}</a>
+								</li>
+								{% endfor %}
+
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-8 col-md-9">
+				<div class="right-products">
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="section-title clearfix">
+								<ul>
+									<li>
+										<ul class="nav-view">
+											<li><a data-toggle="tab" href="#grid"> <i class="mdi mdi-view-module"></i>
+												</a></li>
+											<li class="active"><a data-toggle="tab" href="#list"> <i
+														class="mdi mdi-view-list"></i> </a></li>
+										</ul>
+									</li>
+									<li class="sort-by floatright">
+
+										Showing {{ page_obj.number }} of {{ page_obj.paginator.num_pages }} Results
+
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="tab-content grid-content">
+							<div class="tab-pane fade in text-center" id="grid">
+
+
+								<div class="col-xs-12 col-sm-6 col-md-4">
+
+								</div>
+
+
+							</div>
+							<!-- single product end -->
+							<div class="tab-pane fade active in" id="list">
+								<div class="col-xs-12">
+
+
+									{% for product in products %}
+
+									<div class="single-list-view">
+										<div class="row">
+
+											<div class="col-xs-12 col-md-4">
+												<div class="list-img">
+													<div class="product-img">
+														{% if product.discount.percentage  %}
+														<div class="pro-type sell">
+															<span> {{ product.discount.percentage }} % </span>
+														</div>
+														{% elif product.discount.value %}
+														<div class="pro-type sell">
+															<span> $ {{ product.discount.value }} </span>
+														</div>
+														{% endif %}
+														<a href="{% url 'single_product' product.id %}">
+															{% for image in product.product_images.all %}
+															{% if image.is_main %}
+															<img style="width: 270px; height: 340.25px;" src="{{image}}"
+																alt="Product Title" />
+															{% endif %}
+															{% endfor %}</a>
+													</div>
+												</div>
+											</div>
+											<input type="hidden" value="{{ product.id }}" class="Idpro">
+
+											<div class="col-xs-12 col-md-8">
+												<div class="list-text">
+													<a href="{{ product.get_absolute_url }}">
+														<h3>{{product.title}}</h3>
+													</a>
+													<span></span>
+													<div class="ratting floatright">
+														<p>{{product.product_reviews.count}} Reviews </p>
+														<i class="mdi mdi-star"></i>
+														<i class="mdi mdi-star"></i>
+														<i class="mdi mdi-star"></i>
+														<i class="mdi mdi-star-half"></i>
+														<i class="mdi mdi-star-outline"></i>
+													</div>
+
+													<h5 class="priceItem" data-value="{{product.new_price}}">
+														{% if product.discount %}
+														<del>${{product.old_price}}</del> ${{product.new_price}}</h5>
+														{% else %}
+														<span>${{product.new_price}}</span>
+														{% endif %}
+													<div class="color-select clearfix">
+														<h6>Color:</h6>
+														{% if product.color.title != "WHITE" %}
+														<span style="background: {{ product.color }} none repeat scroll 0 0; margin-right: 11.58px; border: 1px {{ product.color }} solid;"></span>
+														{% else %}
+														<span style="background: {{ product.color }} none repeat scroll 0 0; margin-right: 11.58px; border: 1px black solid;"></span>
+														{% endif %}
+													</div>
+													<div class="list-btn">
+
+														<a href="#" data="{{product.id}}" class="cartButton"
+															id="cartButton" class="add_to_cart">add to cart</a>
+														<a data="{{product.id}}" class="add_to_wishlist">wishlist</a>
+														<a href="{% url 'single_product' product.id %}"
+															data-toggle="modal" data-target="#quick-view">zoom</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									{% endfor %}
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="pagnation-ul">
+							<!-- Pagination -->
+							<ul class="pagination in-center">
+								{% comment %}
+								{% if page_obj.has_previous %}
+								   <li><a class="pagination-links" data-page="{{ page_obj.previous_page_number }}"><i class="fa fa-angle-left"></i></a></li>
+								{% endif %}
+								{% for page in page_obj.paginator.page_range %}
+								   {% if page is page_obj.number %}
+									  <li class="active"><a href="#">{{page}}</a></li>
+								   {% else %}
+									  <li><a class="pagination-links" data-page="{{page}}">{{page}}</a></li>
+									{% endif %}
+								{% endfor %}
+								{% if page_obj.has_next %}
+								   <li><a class="pagination-links" data-page="{{ page_obj.next_page_number }}"><i class="fa fa-angle-right"></i></a></li>
+								{% endif %}
+								{% endcomment %}
+				  
+								{% if page_obj.has_previous %}
+								   <li><a class="pagination-links" data-page="{{ page_obj.previous_page_number }}" href="?page={{ page_obj.previous_page_number }}{% if request.GET.category_id %}&category_id={{ request.GET.category_id }}{% endif %}                 {% if request.GET.color_id %}&color_id={{ request.GET.color_id }}{% endif %}              {% if request.GET.tag_id %}&tag_id={{request.GET.tag_id}}{% endif %}          {% if request.GET.brand_id %}&brand_id={{request.GET.brand_id}}{% endif %}"><i class="fa fa-angle-left"></i></a></li>
+								{% endif %}
+								{% for page in page_obj.paginator.page_range %}
+								  
+								   {% if page is page_obj.number %}
+									  <li class="active"><a href="?page={{ page }}{% if request.GET.category_id %}&category_id={{ request.GET.category_id }}{% endif %}                 {% if request.GET.color_id %}&color_id={{ request.GET.color_id }}{% endif %}              {% if request.GET.tag_id %}&tag_id={{request.GET.tag_id}}{% endif %}          {% if request.GET.brand_id %}&brand_id={{request.GET.brand_id}}{% endif %}">{{page}}</a></li>
+								   {% else %}
+									  <li><a class="pagination-links" data-page="{{page}}" href="?page={{ page }}{% if request.GET.category_id %}&category_id={{ request.GET.category_id }}{% endif %}                 {% if request.GET.color_id %}&color_id={{ request.GET.color_id }}{% endif %}              {% if request.GET.tag_id %}&tag_id={{request.GET.tag_id}}{% endif %}          {% if request.GET.brand_id %}&brand_id={{request.GET.brand_id}}{% endif %}">{{page}}</a></li>
+									{% endif %}
+								{% endfor %}
+								{% if page_obj.has_next %}
+								   <li><a class="pagination-links" data-page="{{ page_obj.next_page_number }}" href="?page={{ page_obj.next_page_number }}{% if request.GET.category_id %}&category_id={{ request.GET.category_id }}{% endif %}                 {% if request.GET.color_id %}&color_id={{ request.GET.color_id }}{% endif %}              {% if request.GET.tag_id %}&tag_id={{request.GET.tag_id}}{% endif %}          {% if request.GET.brand_id %}&brand_id={{request.GET.brand_id}}{% endif %}"><page class="fa fa-angle-right"></i></a></li>
+								{% endif %}
+							  </ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+</section>
+<!-- product-list-view content section end -->
+<!-- quick view start -->
+<div class="product-details quick-view modal animated zoomInUp" id="quick-view">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="d-table">
+					<div class="d-tablecell">
+						<div class="modal-dialog">
+							<div class="main-view modal-content">
+								<div class="modal-footer" data-dismiss="modal">
+									<span>x</span>
+								</div>
+								<div class="row">
+									<div class="col-xs-12 col-sm-5 col-md-4">
+										<div class="quick-image">
+											<div class="single-quick-image text-center">
+												<div class="list-img">
+													<div class="product-img tab-content">
+														<div class="simpleLens-container tab-pane fade in" id="q-sin-1">
+															<div class="pro-type">
+																<span>new</span>
+															</div>
+															<a class="simpleLens-image"
+																data-lens-image="img/products/z1.jpg" href="#"><img
+																	src="{% static 'img/products/z1.jpg' %}" alt=""
+																	class="simpleLens-big-image"></a>
+														</div>
+														<div class="simpleLens-container tab-pane active fade in"
+															id="q-sin-2">
+															<div class="pro-type sell">
+																<span>sell</span>
+															</div>
+															<a class="simpleLens-image"
+																data-lens-image="img/products/z2.jpg" href="#"><img
+																	src="{% static 'img/products/z2.jpg' %}" alt=""
+																	class="simpleLens-big-image"></a>
+														</div>
+														<div class="simpleLens-container tab-pane fade in" id="q-sin-3">
+															<div class="pro-type">
+																<span>-15%</span>
+															</div>
+															<a class="simpleLens-image"
+																data-lens-image="img/products/z3.jpg" href="#"><img
+																	src="{% static 'img/products/z3.jpg' %}" alt=""
+																	class="simpleLens-big-image"></a>
+														</div>
+														<div class="simpleLens-container tab-pane fade in" id="q-sin-4">
+															<div class="pro-type">
+																<span>new</span>
+															</div>
+															<a class="simpleLens-image"
+																data-lens-image="img/products/z4.jpg" href="#"><img
+																	src="{% static 'img/products/z4.jpg' %}" alt=""
+																	class="simpleLens-big-image"></a>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="quick-thumb">
+												<ul class="product-slider">
+													<li><a data-toggle="tab" href="#q-sin-1"> <img
+																src="{% static 'img/products/s1.jpg' %}"
+																alt="quick view" /> </a></li>
+													<li class="active"><a data-toggle="tab" href="#q-sin-2"> <img
+																src="{% static 'img/products/s2.jpg' %}"
+																alt="small image" /> </a></li>
+													<li><a data-toggle="tab" href="#q-sin-3"> <img
+																src="{% static 'img/products/s3.jpg' %}"
+																alt="small image" /> </a></li>
+													<li><a data-toggle="tab" href="#q-sin-4"> <img
+																src="{% static 'img/products/s4.jpg' %}"
+																alt="small image" /> </a></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+									<div class="col-xs-12 col-sm-7 col-md-8">
+										<div class="quick-right">
+											{% for product in products %}
+											<div class="list-text">
+												<a href="{{ product.get_absolute_url }}">
+													<h3>{{product.title}}</h3>
+												</a>
+												<span></span>
+												<div class="ratting floatright">
+													<p>{{product.product_reviews.count}} Reviews </p>
+													<i class="mdi mdi-star"></i>
+													<i class="mdi mdi-star"></i>
+													<i class="mdi mdi-star"></i>
+													<i class="mdi mdi-star-half"></i>
+													<i class="mdi mdi-star-outline"></i>
+												</div>
+
+												<h5 class="priceItem" data-value="{{product.new_price}}">
+													{% if product.discount %}
+													<del>${{product.old_price}}</del> ${{product.new_price}}</h5>
+													{% else %}
+													<span>${{product.new_price}}</span>
+													{% endif %}
+												<div class="list-btn">
+													<a href="#" data="{{product.id}}" class="cartButton" id="cartButton"
+														class="add_to_cart">add to cart</a>
+													<a href="#" data="{{product.id}}">wishlist</a>
+													<a href="{% url 'single_product' product.id %}"
+														data="{{product.id}}" data-toggle="modal"
+														data-target="#quick-view">zoom</a>
+												</div>
+											</div>
+											{% endfor %}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- quick view end -->
+{% block cart %}
+<script src="{% static 'js/wishlist.js' %}"></script>
+
+{% endblock %}
+{% endblock %}
